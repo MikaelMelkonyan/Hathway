@@ -27,4 +27,14 @@ enum Actions {
         let error: Api.Error
         let id: String
     }
+    
+    struct AddToFavorites: Actionable, Identifiable {
+        let collectionID: String
+        let id: Int
+    }
+    
+    struct RemoveFromFavorites: Actionable, Identifiable {
+        let collectionID: String
+        let id: Int
+    }
 }

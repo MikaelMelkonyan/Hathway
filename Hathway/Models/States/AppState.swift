@@ -6,14 +6,12 @@
 //
 
 struct AppState {
-    
-    private(set) var allState = AllState.none
+    private(set) var items = ItemsState()
 }
 
 // MARK: - Reducible
 extension AppState: Reducible {
     mutating func reduce(_ action: Actionable) {
-        allState.reduce(action)
+        items.reduce(action)
     }
 }
-

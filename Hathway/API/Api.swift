@@ -38,6 +38,12 @@ extension Api {
 private extension Api {
     
     func checkResult<Success: Decodable>(
+        data: Data?, response: URLResponse?, error: NSError?,
+        completion: @escaping (Result<Success, Error>) -> Void
+    ) {
+        let statusCode = (response as? HTTPURLResponse)?.statusCode
+        
+        var decodingError: DecodingError?
         if let data = data {
             #if DEBUG
             #warning("todo")

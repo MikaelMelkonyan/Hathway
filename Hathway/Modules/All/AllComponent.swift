@@ -7,21 +7,32 @@
 
 import SwiftUI
 
-struct AllComponent<Loading: Container, Message: Container>: Component {
+struct AllComponent<Loading: Container, Message: Container, Details: Container>: Component {
     let properties: Properties
     
     var body: some View {
-        switch properties.state {
-        case .none, .loading:
-            properties.loading()
-        case let .loaded(result):
-            switch result {
-            case let .success(beers):
-                List(beers) { beer in
-                    Text(beer.name)
+        NavigationView {
+            switch properties.state {
+            case .none, .loading:
+                properties.loading()
+                    .navigationBarTitle(Text("All"))
+            case let .loaded(result):
+                switch result {
+                case let .success(beers):
+                    List {
+                        ForEach(beers, id: \.beer.id) { (beer, isFavorite) in
+                            NavigationLink(destination: properties.details(beer)) {
+                                BeerItemView(properties: .init(
+                                    name: beer.name, imageURL: beer.imageURL, isFavorite: isFavorite
+                                ))
+                            }
+                        }
+                    }
+                    .navigationBarTitle(Text("All"))
+                case let .failure(error):
+                    properties.message(error.description)
+                        .navigationBarTitle(Text("All"))
                 }
-            case let .failure(error):
-                properties.message(error.description)
             }
         }
     }
@@ -33,6 +44,7 @@ extension AllComponent {
         
         var loading: () -> Loading
         var message: (String) -> Message
+        var details: (Beer) -> Details
     }
 }
 
@@ -42,7 +54,8 @@ struct AllComponent_Previews: PreviewProvider {
         AllComponent(properties: .init(
             state: .loading,
             loading: { RenderContainer(view: LoadingComponent_Previews.previews) },
-            message: { _ in RenderContainer(view: MessageComponent_Previews.previews) }
+            message: { _ in RenderContainer(view: MessageComponent_Previews.previews) },
+            details: { _ in RenderContainer(view: DetailsComponent_Previews.previews) }
         ))
     }
 }

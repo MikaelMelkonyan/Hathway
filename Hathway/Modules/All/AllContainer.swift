@@ -6,14 +6,15 @@
 //
 
 struct AllContainer: Container {
-    typealias ContainerComponent = AllComponent<LoadingContainer, MessageContainer>
-    private var isLoadedBefore = false
+    typealias ContainerComponent = AllComponent<LoadingContainer, MessageContainer, DetailsContainer>
     
     func properties(store: AppEnvironmentStore) -> ContainerComponent.Properties {
-        .init(state: store.state.allState) {
+        .init(state: store.state.items.allState) {
             LoadingContainer()
         } message: {
             MessageContainer(message: $0)
+        } details: {
+            DetailsContainer(beer: $0)
         }
     }
 }

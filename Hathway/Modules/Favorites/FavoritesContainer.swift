@@ -6,9 +6,15 @@
 //
 
 struct FavoritesContainer: Container {
-    typealias ContainerComponent = FavoritesComponent
+    typealias ContainerComponent = FavoritesComponent<LoadingContainer, MessageContainer, DetailsContainer>
     
     func properties(store: AppEnvironmentStore) -> ContainerComponent.Properties {
-        .init()
+        .init(state: store.state.items.favoritesState) {
+            LoadingContainer()
+        } message: {
+            MessageContainer(message: $0)
+        } details: {
+            DetailsContainer(beer: $0)
+        }
     }
 }
