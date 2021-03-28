@@ -15,6 +15,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let store = AppEnvironmentStore(store: AppStore(initial: AppState()))
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        store.subscribe(AllMiddleware.self)
+        
         let contentView = TabsContainer().environmentObject(store)
         
         guard let windowScene = scene as? UIWindowScene else { return }
@@ -22,5 +24,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = UIHostingController(rootView: contentView)
         self.window = window
         window.makeKeyAndVisible()
+        
+        store.dispatch(Actions.AppLaunched())
     }
 }

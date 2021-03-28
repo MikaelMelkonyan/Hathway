@@ -1,10 +1,10 @@
 //
-//  Actions.swift
+//  Flow.swift
 //  Hathway
 //
 //  Created by Mikael Melkonyan on 27.03.2021.
 //
 
-enum Actions {
-    
+protocol Flow: Reducible {
+   init()
 }

@@ -1,9 +1,9 @@
 //
 //  Store.swift
-//  Rocket
+//  Hathway
 //
 //  Created by Mikael Melkonyan on 25.02.2021.
-//  Copyright © 2021 Rocket. All rights reserved.
+//  Copyright © 2021 Hathway. All rights reserved.
 //
 
 import Foundation
@@ -28,6 +28,7 @@ final class Store<State> {
     }
     
     private var observers = Set<Observer<State>>()
+    private var middlewares = Set<Middleware<State>>()
 }
 
 // MARK: - Internal
@@ -38,6 +39,9 @@ extension Store {
             self.reducer(&newState, action)
             self.state = newState
             self.observers.forEach { $0.observe(new: self.state) }
+            self.middlewares.forEach { mw in
+                mw.queue.sync { mw.sink(action: action) }
+            }
         }
     }
     
@@ -56,6 +60,12 @@ extension Store {
         queue.async {
             self.observers.insert(observer)
             observer.observe(new: self.state)
+        }
+    }
+    
+    func subscribe(middleware: Middleware<State>) {
+        queue.async {
+            self.middlewares.insert(middleware)
         }
     }
 }

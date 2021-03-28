@@ -1,9 +1,9 @@
 //
 //  EnvironmentStore.swift
-//  Rocket
+//  Hathway
 //
 //  Created by Mikael Melkonyan on 25.02.2021.
-//  Copyright © 2021 Rocket. All rights reserved.
+//  Copyright © 2021 Hathway. All rights reserved.
 //
 
 import Combine
@@ -37,6 +37,10 @@ extension EnvironmentStore {
     
     func bind<T, Action: Actionable>(_ action: @escaping (T) -> Action) -> CommandWith<T> {
         return { value in self.dispatch(action(value)) }
+    }
+    
+    func subscribe(_ middlewareType: Middleware<State>.Type) {
+        store.subscribe(middleware: middlewareType.init(store: store))
     }
 }
 
