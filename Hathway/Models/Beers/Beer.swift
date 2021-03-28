@@ -11,7 +11,7 @@ struct Beer: Identifiable {
     let tagline: String
     let description: String
     let firstBrewed: String
-    let imageURL: String
+    let imageURL: String?
 }
 
 // MARK: - Decodable
@@ -24,7 +24,7 @@ extension Beer: Decodable {
         tagline = try container.decode(String.self, forKey: .tagline)
         description = try container.decode(String.self, forKey: .description)
         firstBrewed = try container.decode(String.self, forKey: .firstBrewed)
-        imageURL = try container.decode(String.self, forKey: .imageURL)
+        imageURL = try container.decodeIfPresent(String.self, forKey: .imageURL)
     }
     
     enum CodingKeys: String, CodingKey {

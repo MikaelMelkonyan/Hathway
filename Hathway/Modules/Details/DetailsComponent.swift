@@ -14,7 +14,7 @@ struct DetailsComponent: Component {
         GeometryReader { geometry in
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
-                    ImageView(withURL: properties.beer.imageURL)
+                    image
                         .frame(width: geometry.size.width, height: geometry.size.width)
                     
                     HStack(spacing: 8) {
@@ -37,13 +37,22 @@ struct DetailsComponent: Component {
             }
         }
         .padding()
-        .navigationBarTitle(Text(properties.beer.name), displayMode: .inline)
-        .navigationBarItems(trailing: likeButton)
+        .navigationBarTitle(Text(properties.isRandom ? "Random" : properties.beer.name), displayMode: .inline)
+        .navigationBarItems(trailing: navigationButton)
     }
 }
 
 // MARK: - Private
 private extension DetailsComponent {
+    @ViewBuilder
+    var navigationButton: some View {
+        if properties.isRandom {
+            randomizeButton
+        } else {
+            likeButton
+        }
+    }
+    
     var likeButton: some View {
         Button(action: {
             if properties.isFavorite {
@@ -55,6 +64,23 @@ private extension DetailsComponent {
             Image(systemName: properties.isFavorite ? "star.fill" : "star")
         })
     }
+    
+    var randomizeButton: some View {
+        Button(action: {
+            properties.getAnother()
+        }, label: {
+            Image(systemName: "shuffle")
+        })
+    }
+    
+    @ViewBuilder
+    var image: some View {
+        if let url = properties.beer.imageURL {
+            ImageView(withURL: url)
+        } else {
+            Group {}
+        }
+    }
 }
 
 // MARK: - Model
@@ -62,9 +88,11 @@ extension DetailsComponent {
     struct Properties {
         let beer: Beer
         let isFavorite: Bool
+        let isRandom: Bool
         
         var addToFavorites: Command
         var removeFromFavorites: Command
+        var getAnother: Command
     }
 }
 
@@ -77,9 +105,8 @@ struct DetailsComponent_Previews: PreviewProvider {
                 tagline: "Tagline", description: "Description",
                 firstBrewed: "02/2007", imageURL: ""
             ),
-            isFavorite: true,
-            addToFavorites: {},
-            removeFromFavorites: {}
+            isFavorite: true, isRandom: false,
+            addToFavorites: {}, removeFromFavorites: {}, getAnother: {}
         ))
     }
 }

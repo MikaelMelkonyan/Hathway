@@ -45,12 +45,6 @@ private extension Api {
         
         var decodingError: DecodingError?
         if let data = data {
-            #if DEBUG
-            #warning("todo")
-//            print("URL ", response?.url ?? "")
-//            let string = String(data: data, encoding: .utf8) ?? "Data isn't convertable to String"
-//            print(string)
-            #endif
             let decoder = JSONDecoder()
             do {
                 let result = try decoder.decode(Success.self, from: data)

@@ -21,6 +21,8 @@
 		667EBA442610FE850025124D /* FavoritesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667EBA432610FE850025124D /* FavoritesState.swift */; };
 		667EBA49261106D60025124D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667EBA48261106D60025124D /* ImageView.swift */; };
 		667EBA502611100A0025124D /* BeerItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667EBA4F2611100A0025124D /* BeerItemView.swift */; };
+		667EBA56261114760025124D /* RandomMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667EBA55261114760025124D /* RandomMiddleware.swift */; };
+		667EBA59261116050025124D /* RandomItemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667EBA58261116050025124D /* RandomItemState.swift */; };
 		669CA4DE260F755D002F0067 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669CA4DD260F755D002F0067 /* SceneDelegate.swift */; };
 		669CA4E6260F7657002F0067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669CA4E5260F7657002F0067 /* AppDelegate.swift */; };
 		669CA4EB260F7733002F0067 /* TabsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669CA4EA260F7733002F0067 /* TabsContainer.swift */; };
@@ -73,6 +75,8 @@
 		667EBA432610FE850025124D /* FavoritesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesState.swift; sourceTree = "<group>"; };
 		667EBA48261106D60025124D /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		667EBA4F2611100A0025124D /* BeerItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerItemView.swift; sourceTree = "<group>"; };
+		667EBA55261114760025124D /* RandomMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMiddleware.swift; sourceTree = "<group>"; };
+		667EBA58261116050025124D /* RandomItemState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomItemState.swift; sourceTree = "<group>"; };
 		669CA4DD260F755D002F0067 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		669CA4E5260F7657002F0067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		669CA4EA260F7733002F0067 /* TabsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsContainer.swift; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 		669CA52B260F7B71002F0067 /* Random */ = {
 			isa = PBXGroup;
 			children = (
+				667EBA55261114760025124D /* RandomMiddleware.swift */,
+				667EBA58261116050025124D /* RandomItemState.swift */,
 				669CA52D260F7BA8002F0067 /* RandomContainer.swift */,
 				669CA530260F7BB5002F0067 /* RandomComponent.swift */,
 			);
@@ -495,8 +501,10 @@
 				667EBA49261106D60025124D /* ImageView.swift in Sources */,
 				660A8546260FAA3D008A0B1B /* Beer.swift in Sources */,
 				669CA548260F886B002F0067 /* LoadingContainer.swift in Sources */,
+				667EBA59261116050025124D /* RandomItemState.swift in Sources */,
 				669CA535260F7BDC002F0067 /* FavoritesContainer.swift in Sources */,
 				669CA502260F77AF002F0067 /* EnvironmentStore.swift in Sources */,
+				667EBA56261114760025124D /* RandomMiddleware.swift in Sources */,
 				669CA529260F7B6D002F0067 /* AllComponent.swift in Sources */,
 				667EBA312610BD770025124D /* StringIdentifiable.swift in Sources */,
 				669CA550260F8901002F0067 /* MessageContainer.swift in Sources */,

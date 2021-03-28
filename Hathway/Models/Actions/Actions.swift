@@ -23,6 +23,11 @@ enum Actions {
         let id: String
     }
     
+    struct DidLoadItem<Item>: Actionable, Identifiable {
+        let item: Item
+        let id: String
+    }
+    
     struct DidGetError: Actionable, Identifiable {
         let error: Api.Error
         let id: String
@@ -36,5 +41,9 @@ enum Actions {
     struct RemoveFromFavorites: Actionable, Identifiable {
         let collectionID: String
         let id: Int
+    }
+    
+    struct LoadRandomBeer: Actionable, Identifiable {
+        let id: String
     }
 }

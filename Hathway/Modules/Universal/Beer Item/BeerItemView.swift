@@ -13,7 +13,7 @@ struct BeerItemView: Component {
     var body: some View {
         HStack {
             HStack(spacing: 16) {
-                ImageView(withURL: properties.imageURL)
+                image
                     .frame(width: 80, height: 80)
                 
                 Text(properties.name)
@@ -26,11 +26,23 @@ struct BeerItemView: Component {
     }
 }
 
+// MARK: - Private
+private extension BeerItemView {
+    @ViewBuilder
+    var image: some View {
+        if let url = properties.imageURL {
+            ImageView(withURL: url)
+        } else {
+            Group {}
+        }
+    }
+}
+
 // MARK: - Model
 extension BeerItemView {
     struct Properties {
         let name: String
-        let imageURL: String
+        let imageURL: String?
         let isFavorite: Bool
     }
 }

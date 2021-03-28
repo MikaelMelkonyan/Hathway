@@ -14,7 +14,7 @@ struct FavoritesContainer: Container {
         } message: {
             MessageContainer(message: $0)
         } details: {
-            DetailsContainer(beer: $0)
+            DetailsContainer(beer: $0, isRandom: false)
         }
     }
 }

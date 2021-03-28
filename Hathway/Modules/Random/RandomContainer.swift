@@ -6,9 +6,15 @@
 //
 
 struct RandomContainer: Container {
-    typealias ContainerComponent = RandomComponent
+    typealias ContainerComponent = RandomComponent<LoadingContainer, MessageContainer, DetailsContainer>
     
     func properties(store: AppEnvironmentStore) -> ContainerComponent.Properties {
-        .init()
+        .init(state: store.state.randomItem) {
+            LoadingContainer()
+        } message: {
+            MessageContainer(message: $0)
+        } details: {
+            DetailsContainer(beer: $0, isRandom: true)
+        }
     }
 }
